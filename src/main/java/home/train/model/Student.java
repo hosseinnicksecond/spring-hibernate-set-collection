@@ -69,4 +69,15 @@ public class Student {
     public void setImages(Set<String> images) {
         this.images = images;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", images=" + images +
+                '}';
+    }
 }
