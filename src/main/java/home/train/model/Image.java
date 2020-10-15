@@ -1,5 +1,7 @@
 package home.train.model;
 
+
+
 public class Image {
 
     private int studentId;
