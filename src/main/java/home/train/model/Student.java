@@ -1,15 +1,26 @@
 package home.train.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import org.hibernate.annotations.Columns;
 
+import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
+
+
+@Entity
 public class Student {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
     private String email;
-    private Set<String> images= new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name="image")
+    @MapKeyColumn(name = "image_id")
+    @Column(name = "image_name")
+    private Map<Integer, String> images= new HashMap<>();
+
 
     public Student() {
     }
@@ -46,11 +57,22 @@ public class Student {
         this.email = email;
     }
 
-    public Set<String> getImages() {
+    public Map<Integer, String> getImages() {
         return images;
     }
 
-    public void setImages(Set<String> images) {
+    public void setImages(Map<Integer, String> images) {
         this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", images=" + images +
+                '}';
     }
 }
