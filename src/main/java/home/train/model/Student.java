@@ -1,6 +1,5 @@
 package home.train.model;
 
-import org.hibernate.annotations.Columns;
 
 import javax.persistence.*;
 import java.util.HashMap;
