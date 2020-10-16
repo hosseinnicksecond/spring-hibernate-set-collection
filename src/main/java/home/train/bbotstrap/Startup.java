@@ -3,9 +3,11 @@ package home.train.bbotstrap;
 import home.train.model.Student;
 import home.train.repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+@Component
 public class Startup implements CommandLineRunner {
 
     private final StudentRepository repository;
