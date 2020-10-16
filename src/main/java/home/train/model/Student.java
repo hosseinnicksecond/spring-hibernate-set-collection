@@ -1,15 +1,28 @@
 package home.train.model;
 
-import java.util.HashSet;
-import java.util.Set;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name="student")
 public class Student {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
     private String email;
-    private Set<String> images= new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "image"
+//            ,joinColumns = @JoinColumn(name = "student_id")
+    )
+    @OrderColumn(name="image_order")
+    @Column(name = "image_name")
+    private List<String> images= new ArrayList<>();
 
     public Student() {
     }
@@ -46,11 +59,21 @@ public class Student {
         this.email = email;
     }
 
-    public Set<String> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(Set<String> images) {
+    public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                "imagesName="+images+
+                '}';
     }
 }
