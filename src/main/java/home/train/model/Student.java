@@ -1,15 +1,22 @@
 package home.train.model;
-
-import java.util.HashSet;
+import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Entity
 public class Student {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
     private String email;
-    private Set<String> images= new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name="image")
+    @org.hibernate.annotations.OrderBy(clause = "file_name desc")
+    @Column(name = "file_name")
+    private Set<String> images= new LinkedHashSet<>();
 
     public Student() {
     }
