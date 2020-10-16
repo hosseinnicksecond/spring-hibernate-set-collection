@@ -12,7 +12,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private String email;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "image")
     @MapKeyColumn(name="image_id")
     @Column(name = "image_name")
