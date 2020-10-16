@@ -1,15 +1,24 @@
 package home.train.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
+@Entity
 public class Student {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
     private String email;
-    private Set<String> images= new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "image")
+    @MapKeyColumn(name="image_id")
+    @Column(name = "image_name")
+    @OrderBy
+    private SortedMap<Integer,String> images= new TreeMap<>();
+
 
     public Student() {
     }
@@ -46,11 +55,22 @@ public class Student {
         this.email = email;
     }
 
-    public Set<String> getImages() {
+    public SortedMap<Integer, String> getImages() {
         return images;
     }
 
-    public void setImages(Set<String> images) {
+    public void setImages(SortedMap<Integer, String> images) {
         this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", images=" + images +
+                '}';
     }
 }
